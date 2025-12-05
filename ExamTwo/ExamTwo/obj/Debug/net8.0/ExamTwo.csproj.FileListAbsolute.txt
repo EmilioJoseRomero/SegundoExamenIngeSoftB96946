@@ -34,3 +34,15 @@ C:\Users\rebec\source\repos\ExamTwo\ExamTwo\obj\Debug\net8.0\refint\ExamTwo.dll
 C:\Users\rebec\source\repos\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.pdb
 C:\Users\rebec\source\repos\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.genruntimeconfig.cache
 C:\Users\rebec\source\repos\ExamTwo\ExamTwo\obj\Debug\net8.0\ref\ExamTwo.dll
+C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.csproj.AssemblyReference.cache
+C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.AssemblyInfoInputs.cache
+C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.AssemblyInfo.cs
+C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.sourcelink.json
+C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.dll
+C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\refint\ExamTwo.dll
+C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.pdb
