@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ExamTwo.Data.Models;
+using ExamTwo.Services;
 
 namespace ExamTwo.Controllers
 {

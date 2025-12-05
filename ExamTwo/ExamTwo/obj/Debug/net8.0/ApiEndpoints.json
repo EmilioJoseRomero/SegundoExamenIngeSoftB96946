@@ -2,20 +2,20 @@
   {
     "ContainingType": "ExamTwo.Controllers.CoffeeMachineController",
     "Method": "BuyCoffee",
-    "RelativePath": "buyCoffee",
+    "RelativePath": "api/CoffeeMachine/buy",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "ExamTwo.Controllers.OrderRequest",
+        "Type": "ExamTwo.Data.Models.OrderRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "System.String",
+        "Type": "ExamTwo.Data.Models.OrderResult",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -27,15 +27,21 @@
   },
   {
     "ContainingType": "ExamTwo.Controllers.CoffeeMachineController",
-    "Method": "GetCoffeePricesInCents",
-    "RelativePath": "getCoffeePricesInCents",
-    "HttpMethod": "GET",
+    "Method": "CalculateTotal",
+    "RelativePath": "api/CoffeeMachine/calculate-total",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "order",
+        "Type": "System.Collections.Generic.Dictionary\u00602[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.Dictionary\u00602[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "System.Int32",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -47,15 +53,15 @@
   },
   {
     "ContainingType": "ExamTwo.Controllers.CoffeeMachineController",
-    "Method": "GetCoffeePrices",
-    "RelativePath": "getCoffees",
+    "Method": "GetCoffees",
+    "RelativePath": "api/CoffeeMachine/coffees",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.Dictionary\u00602[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "System.Collections.Generic.List\u00601[[ExamTwo.Data.Models.Coffee, ExamTwo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -67,15 +73,15 @@
   },
   {
     "ContainingType": "ExamTwo.Controllers.CoffeeMachineController",
-    "Method": "GetQuantity",
-    "RelativePath": "getQuantity",
+    "Method": "GetCoins",
+    "RelativePath": "api/CoffeeMachine/coins",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.Dictionary\u00602[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "System.Collections.Generic.List\u00601[[ExamTwo.Data.Models.Coin, ExamTwo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

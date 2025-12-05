@@ -1,4 +1,6 @@
 ﻿using System;
+using ExamTwo.Data.Models;
+using ExamTwo.Data.Repositories;
 
 namespace ExamTwo.Data.Repositories
 {
