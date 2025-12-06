@@ -19,9 +19,17 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("VueFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173")
+        policy.WithOrigins(
+            "http://localhost:8080",    
+            "http://localhost:5173",    
+            "http://localhost:3000",    
+            "https://localhost:8080",
+            "http://localhost:5000",
+            "https://localhost:5001"
+         )
               .AllowAnyHeader()
-              .AllowAnyMethod();
+              .AllowAnyMethod()
+              .AllowCredentials();
     });
 });
 
