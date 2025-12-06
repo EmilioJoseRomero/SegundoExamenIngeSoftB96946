@@ -87,6 +87,35 @@ namespace ExamTwo.Services
                     }
                 }
 
+                foreach (var coin in request.Payment.Coins)
+                {
+                    if (!IsValidCoin(coin))
+                        return new OrderResult  
+                        {
+                            Success = false,
+                            Message = $"Moneda no válida: {coin}. Monedas válidas: 25, 50, 100, 500, 1000"
+                        };
+                }
+
+                foreach (var bill in request.Payment.Bills)
+                {
+                    if (bill != 1000)
+                        return new OrderResult  
+                        {
+                            Success = false,
+                            Message = $"Billete no válido: {bill}. Solo se aceptan billetes de 1000"
+                        };
+                }
+
+                if (!ValidatePaymentAmount(request.Payment))
+                {
+                    return new OrderResult
+                    {
+                        Success = false,
+                        Message = "El monto total no coincide con las monedas/billetes ingresados."
+                    };
+                }
+
                 int changeAmount = request.Payment.TotalAmount - totalCost;
                 var changeBreakdown = CalculateChange(changeAmount);
 
@@ -166,6 +195,27 @@ namespace ExamTwo.Services
             }
         }
 
+        private bool ValidatePaymentAmount(Payment payment)
+        {
+            int calculatedTotal = 0;
+
+            foreach (var coin in payment.Coins)
+            {
+                if (!IsValidCoin(coin))
+                    return false;
+                calculatedTotal += coin;
+            }
+
+            foreach (var bill in payment.Bills)
+            {
+                if (bill != 1000)
+                    return false;
+                calculatedTotal += bill;
+            }
+
+            return calculatedTotal == payment.TotalAmount;
+        }
+
         private Dictionary<int, int>? CalculateChange(int changeAmount)
         {
             if (changeAmount == 0) return new Dictionary<int, int>();
@@ -193,6 +243,12 @@ namespace ExamTwo.Services
             }
 
             return remainingChange == 0 ? changeBreakdown : null;
+        }
+
+        private bool IsValidCoin(int denomination)
+        {
+            int[] validCoins = { 25, 50, 100, 500, 1000 };
+            return validCoins.Contains(denomination);
         }
     }
 }

@@ -42,12 +42,12 @@ namespace ExamTwo.Data.Repositories
         public Coin? GetCoinByDenomination(int denomination) =>
             _coins.FirstOrDefault(c => c.Denomination == denomination);
 
-        public void UpdateCoin(Coin coin)
+        public void UpdateCoin(Coin updatedCoin)
         {
-            var existing = GetCoinByDenomination(coin.Denomination);
+            var existing = _coins.FirstOrDefault(c => c.Denomination == updatedCoin.Denomination);
             if (existing != null)
             {
-                existing.Quantity = coin.Quantity;
+                existing.Quantity = updatedCoin.Quantity; 
             }
         }
     }
