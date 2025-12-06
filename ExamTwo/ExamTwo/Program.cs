@@ -10,7 +10,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Registrar dependencias
-builder.Services.AddSingleton<IDatabase, InMemoryDatabase>();
+builder.Services.AddSingleton<IDatabase>(sp =>
+    new InMemoryDatabase(sp.GetRequiredService<ILogger<InMemoryDatabase>>()));
 builder.Services.AddScoped<ICoffeeMachineService, CoffeeMachineService>();
 
 // Configurar CORS para el frontend
