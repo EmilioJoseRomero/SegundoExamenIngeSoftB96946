@@ -69,4 +69,3 @@ C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\n
 C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.csproj.Up2Date
 C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ExamTwo.genruntimeconfig.cache
 C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\ref\ExamTwo.dll
-C:\Users\Usuario\Desktop\SegundoExamenIngeSoftB96946\ExamTwo\ExamTwo\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
