@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/getCoffees": {
+    "/api/CoffeeMachine/coffees": {
       "get": {
         "tags": [
           "CoffeeMachine"
@@ -16,28 +16,25 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "integer",
-                    "format": "int32"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Coffee"
                   }
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "integer",
-                    "format": "int32"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Coffee"
                   }
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "integer",
-                    "format": "int32"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Coffee"
                   }
                 }
               }
@@ -46,7 +43,7 @@
         }
       }
     },
-    "/getCoffeePricesInCents": {
+    "/api/CoffeeMachine/coins": {
       "get": {
         "tags": [
           "CoffeeMachine"
@@ -57,28 +54,25 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "integer",
-                    "format": "int32"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Coin"
                   }
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "integer",
-                    "format": "int32"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Coin"
                   }
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "integer",
-                    "format": "int32"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Coin"
                   }
                 }
               }
@@ -87,40 +81,62 @@
         }
       }
     },
-    "/getQuantity": {
-      "get": {
+    "/api/CoffeeMachine/calculate-total": {
+      "post": {
         "tags": [
           "CoffeeMachine"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "integer",
-                    "format": "int32"
-                  }
+                  "type": "integer",
+                  "format": "int32"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "integer",
-                    "format": "int32"
-                  }
+                  "type": "integer",
+                  "format": "int32"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "integer",
-                    "format": "int32"
-                  }
+                  "type": "integer",
+                  "format": "int32"
                 }
               }
             }
@@ -128,7 +144,7 @@
         }
       }
     },
-    "/buyCoffee": {
+    "/api/CoffeeMachine/buy": {
       "post": {
         "tags": [
           "CoffeeMachine"
@@ -158,17 +174,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/OrderResult"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/OrderResult"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/OrderResult"
                 }
               }
             }
@@ -179,6 +195,38 @@
   },
   "components": {
     "schemas": {
+      "Coffee": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Coin": {
+        "type": "object",
+        "properties": {
+          "denomination": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "OrderRequest": {
         "type": "object",
         "properties": {
@@ -192,6 +240,38 @@
           },
           "payment": {
             "$ref": "#/components/schemas/Payment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderResult": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "changeAmount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "changeBreakdown": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "updatedCoffees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Coffee"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false

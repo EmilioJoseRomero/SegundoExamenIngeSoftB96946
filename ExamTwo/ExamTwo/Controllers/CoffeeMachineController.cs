@@ -1,107 +1,61 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ExamTwo.Data.Models;
+using ExamTwo.Services;
 
 namespace ExamTwo.Controllers
 {
-    public class CoffeeMachineController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class CoffeeMachineController : ControllerBase
     {
+        private readonly ICoffeeMachineService _coffeeMachineService;
 
-        private readonly Database _db;
-
-        public CoffeeMachineController(Database db)
+        public CoffeeMachineController(ICoffeeMachineService coffeeMachineService)
         {
-            _db = db;
+            _coffeeMachineService = coffeeMachineService;
         }
 
-        [HttpGet("getCoffees")]
-        public ActionResult<Dictionary<string, int>> GetCoffeePrices()
+        [HttpGet("coffees")]
+        public ActionResult<List<Coffee>> GetCoffees()
         {
-            return Ok(_db.keyValues);
+            var coffees = _coffeeMachineService.GetAvailableCoffees();
+            return Ok(coffees);
         }
 
-        [HttpGet("getCoffeePricesInCents")]
-        public ActionResult<Dictionary<string, int>> GetCoffeePricesInCents()
+        [HttpGet("coins")]
+        public ActionResult<List<Coin>> GetCoins()
         {
-            return Ok(_db.keyValues2);
+            var coins = _coffeeMachineService.GetAvailableCoins();
+            return Ok(coins);
         }
 
-        [HttpGet("getQuantity")]
-        public ActionResult<Dictionary<string, int>> GetQuantity()
+        [HttpPost("calculate-total")]
+        public ActionResult<int> CalculateTotal([FromBody] Dictionary<string, int> order)
         {
-            return Ok(_db.keyValues3);
+            if (order == null || order.Count == 0)
+                return BadRequest("La orden no puede estar vacía");
+
+            var total = _coffeeMachineService.CalculateOrderTotal(order);
+            return Ok(total);
         }
 
-        [HttpPost("buyCoffee")]
-        public ActionResult<string> BuyCoffee([FromBody] OrderRequest request)
+        [HttpPost("buy")]
+        public ActionResult<OrderResult> BuyCoffee([FromBody] OrderRequest request)
         {
-            if (request.Order == null || request.Order.Count == 0)
-                return BadRequest("Ordem vacia.");
+            var result = _coffeeMachineService.ProcessOrder(request);
 
-            if (request.Payment.TotalAmount <= 0)
-                return BadRequest("Dinero insuficiente ");
+            if (!result.Success)
+                return BadRequest(new { error = result.Message });
 
-            try
+            return Ok(new
             {
-                var costoTotal = request.Order.Sum(o => _db.keyValues2.First(c => c.Key == o.Key).Value * o.Value);
-
-                if (request.Payment.TotalAmount < costoTotal)
-                { 
-                    return BadRequest("Dinero insuficiente ");
-                }
-
-
-                foreach (var cafe in request.Order)
-                {
-                    var selected = _db.keyValues.First(c => c.Key == cafe.Key).Key;
-                    if (cafe.Value > _db.keyValues[selected])
-                    {
-                        return $"No hay suficientes {selected} en la máquina.";
-                    }
-                    _db.keyValues[selected] -= cafe.Value;
-                }
-
-                var change = request.Payment.TotalAmount - costoTotal;
-                String result = $"Su vuelto es de: {change} colones. Desglose:";
-
-                foreach (var coin in _db.keyValues3.Keys.OrderByDescending(c => c))
-                {
-                    var count = Math.Min(change / coin, _db.keyValues3[coin]);
-                    if (count > 0)
-                    {
-                        result +=  $" {count} moneda de {coin},  ";              
-                        change -= coin * count;
-                    }
-                }
-
-
-                if (change > 0)
-                {
-                    return StatusCode(500, "No hay suficiente cambio en la máquina.");
-                }
-
-                return Ok(result);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
+                success = true,
+                message = result.Message,
+                change = result.ChangeBreakdown,
+                updatedCoffees = result.UpdatedCoffees,
+                totalChange = result.ChangeAmount
+            });
         }
-    }
-
-    public class OrderRequest
-    {
-        public Dictionary<string, int> Order { get; set; }
-        public Payment Payment { get; set; }
-    }
-
-    public class Payment
-    {
-        public int TotalAmount { get; set; }
-        public List<int> Coins { get; set; }
-        public List<int> Bills { get; set; }
     }
 }
